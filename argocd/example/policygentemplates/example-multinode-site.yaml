@@ -2,7 +2,7 @@
 apiVersion: ran.openshift.io/v1
 kind: PolicyGenTemplate
 metadata:
-  name: "example-multinode-site-latest"
+  name: "example-multinode-site"
   namespace: "ztp-site"
 spec:
   bindingRules:

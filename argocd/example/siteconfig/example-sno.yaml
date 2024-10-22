@@ -9,7 +9,7 @@ spec:
   baseDomain: "example2.com"
   pullSecretRef:
     name: "assisted-deployment-pull-secret"
-  clusterImageSetNameRef: "img4.14.38-x86-64-appsub"
+  clusterImageSetNameRef: "img4.16.9-x86-64-appsub"
   sshPublicKey: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFcGadvq//BwdEyE6BaDmuNKOJwSq4q9Mlyf/stLkEev kni@bastion.pele"
   clusters:
   - clusterName: "example-sno"

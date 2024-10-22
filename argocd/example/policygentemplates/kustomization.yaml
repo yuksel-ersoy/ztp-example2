@@ -23,9 +23,9 @@ generators:
 resources:
 - ns.yaml
 # The resources from below are only needed if policies from hub-side-templating are used.
-- hub-side-templating/configMaps/group-hardware-types-configmap.yaml
-- hub-side-templating/configMaps/group-zones-configmap.yaml
-- hub-side-templating/configMaps/site-data-configmap.yaml
+#- hub-side-templating/configMaps/group-hardware-types-configmap.yaml
+#- hub-side-templating/configMaps/group-zones-configmap.yaml
+#- hub-side-templating/configMaps/site-data-configmap.yaml
 
 # Updates to the PerformanceProfile or MachineConfigurations may take a short period of time before 
 # causing the MachineConfigPool to move to degraded. This patch adds an annotation to validator policy.
