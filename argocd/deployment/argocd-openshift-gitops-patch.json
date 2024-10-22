@@ -17,7 +17,8 @@
       "volumes": [
         {
           "name": "kustomize",
-          "emptyDir": {}
+          "readOnly": false,
+          "path": "/.config"
         }
       ],
       "initContainers": [
@@ -41,24 +42,6 @@
           ],
           "terminationMessagePolicy": "File",
           "image": "registry.redhat.io/openshift4/ztp-site-generate-rhel8:v4.16.1"
-        },
-        {
-          "args": [
-            "-c",
-            "mkdir -p /.config/kustomize/plugin/policy.open-cluster-management.io/v1/policygenerator && cp /policy-generator/PolicyGenerator-not-fips-compliant /.config/kustomize/plugin/policy.open-cluster-management.io/v1/policygenerator/PolicyGenerator"
-          ],
-          "command": [
-            "/bin/bash"
-          ],
-          "image": "registry.redhat.io/rhacm2/multicluster-operators-subscription-rhel9:v2.10",
-          "name": "policy-generator-install",
-          "imagePullPolicy": "Always",
-          "volumeMounts": [
-            {
-              "mountPath": "/.config",
-              "name": "kustomize"
-            }
-          ]
         }
       ],
       "volumeMounts": [
