@@ -41,7 +41,7 @@ spec:
         # Optionally; This can be used to configure desired BIOS setting on a host:
         #biosConfigRef:
         #  filePath: "example-hw.profile"
-        bmcAddress: "redfish-virtualmedia+http://192.168.62.250:8000/redfish/v1/Systems/50cc6827-1a04-4957-a81d-9b9e90bb1f18"
+        bmcAddress: "redfish-virtualmedia+http://192.168.62.200:8000/redfish/v1/Systems/50cc6827-1a04-4957-a81d-9b9e90bb1f18"
         bmcCredentialsName:
           name: "bmh-secret"
         bootMACAddress: "52:54:00:b4:44:44"
