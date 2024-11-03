@@ -3,23 +3,23 @@
 apiVersion: ran.openshift.io/v1
 kind: SiteConfig
 metadata:
-  name: "example-3node"
-  namespace: "example-3node"
+  name: "3node"
+  namespace: "3node"
 spec:
   baseDomain: "example.com"
   pullSecretRef:
     name: "assisted-deployment-pull-secret"
-  clusterImageSetNameRef: "openshift-4.16"
-  sshPublicKey: "ssh-rsa AAAA..."
+  clusterImageSetNameRef: "img4.16.9-x86-64-appsub"
+  sshPublicKey: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHQ67UjA6/++XL0FNBJ2JuUw9Y8TXSDY9K098sf17iZx root@prov9.local"
   clusters:
-  - clusterName: "example-3node"
+  - clusterName: "3node"
     networkType: "OVNKubernetes"
     # It is strongly recommended to include crun manifests as part of the additional install-time manifests for 4.13+.
     # The crun manifests can be obtained from source-crs/optional-extra-manifest/ and added to the git repo ie.3node-extra-manifest.
     # extraManifestPath: 3node-extra-manifest
     clusterLabels:
       # These example cluster labels correspond to the bindingRules in the PolicyGenTemplate examples
-      du-profile: "latest"
+     # du-profile: "latest"
       # These example cluster labels correspond to the bindingRules in the PolicyGenTemplate examples in ../policygentemplates:
       # ../policygentemplates/common-ranGen.yaml will apply to all clusters with 'common: true'
       common: true
@@ -27,17 +27,29 @@ spec:
       group-du-3node: ""
       # ../policygentemplates/example-multinode-site.yaml will apply to all clusters with 'sites: "example-multinode"'
       # Normally this should match or contain the cluster name so it only applies to a single cluster
-      sites : "example-multinode"
+      sites : "3node"
     clusterNetwork:
-      - cidr: 1001:1::/48
-        hostPrefix: 64
-    # For 3-node and standard clusters with static IPs, the API and Ingress IPs must be configured here
-    apiVIP: 1111:2222:3333:4444::1:1
-    ingressVIP: 1111:2222:3333:4444::1:2
+      - cidr: 10.128.0.0/14
+        hostPrefix: 23
+    machineNetwork:
+      - cidr: 192.168.63.0/24
     serviceNetwork:
-      - 1001:2::/112
-    additionalNTPSources:
-      - 1111:2222:3333:4444::2
+      - 172.30.0.0/16
+    #additionalNTPSources:
+    #- 1111:2222:3333:4444::2
+    # Optionally; This can be used to override the KlusterletAddonConfig that is created for this cluster:
+    #crTemplates:
+    #  KlusterletAddonConfig: "KlusterletAddonConfigOverride.yaml"
+    #clusterNetwork:
+     # - cidr: 1001:1::/48
+      #  hostPrefix: 64
+    # For 3-node and standard clusters with static IPs, the API and Ingress IPs must be configured here
+    #apiVIP: 1111:2222:3333:4444::1:1
+    #ingressVIP: 1111:2222:3333:4444::1:2
+    #serviceNetwork:
+     # - 1001:2::/112
+    #additionalNTPSources:
+    #  - 1111:2222:3333:4444::2
     # Optionally; This can be used to override the KlusterletAddonConfig that is created for this cluster:
     #crTemplates:
     #  KlusterletAddonConfig: "KlusterletAddonConfigOverride.yaml"
@@ -50,21 +62,21 @@ spec:
         nodeLabels:
           node-role.kubernetes.io/master-du:
           custom-label/parameter1: true
-        bmcAddress: "idrac-virtualmedia+https://[1111:2222:3333:4444::bbbb:1]/redfish/v1/Systems/System.Embedded.1"
+        bmcAddress: "redfish-virtualmedia+http://192.168.62.250:8000/redfish/v1/Systems/43914e5c-0c14-40be-918e-5c53e650a031"
         bmcCredentialsName:
-          name: "example-node1-bmh-secret"
-        bootMACAddress: "AA:BB:CC:DD:EE:11"
+          name: "bmh-secret"
+        bootMACAddress: "52:54:00:17:29:ff"
         # Use UEFISecureBoot to enable secure boot for this node
         bootMode: "UEFI"
         rootDeviceHints:
-          deviceName: "/dev/disk/by-path/pci-0000:01:00.0-scsi-0:2:0:0"
+          deviceName: "/dev/sda"
         nodeNetwork:
           interfaces:
-            - name: eno1
-              macAddress: "AA:BB:CC:DD:EE:11"
+            - name: enp1s0
+              macAddress: "52:54:00:17:29:ff"
           config:
             interfaces:
-              - name: eno1
+              - name: enp1s0
                 type: ethernet
                 state: up
                 ipv4:
@@ -72,19 +84,19 @@ spec:
                 ipv6:
                   enabled: true
                   address:
-                  - ip: 1111:2222:3333:4444::aaaa:1
-                    prefix-length: 64
+                  - ip: 192.168.63.77
+                    prefix-length: 24
             dns-resolver:
               config:
                 search:
                 - example.com
                 server:
-                - 1111:2222:3333:4444::2
+                - 192.168.63.20
             routes:
               config:
-              - destination: ::/0
-                next-hop-interface: eno1
-                next-hop-address: 1111:2222:3333:4444::1
+              - destination: 0.0.0.0/0
+                next-hop-interface: enp1s0
+                next-hop-address: 192.168.63.1
                 table-id: 254
       - hostName: "example-node2.example.com"
         role: "master"
