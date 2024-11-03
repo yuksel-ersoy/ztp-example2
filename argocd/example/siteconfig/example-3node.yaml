@@ -59,9 +59,6 @@ spec:
     nodes:
       - hostName: "node1.3node.example.com"
         role: "master"
-        nodeLabels:
-          node-role.kubernetes.io/master-du:
-          custom-label/parameter1: true
         bmcAddress: "redfish-virtualmedia+http://192.168.62.250:8000/redfish/v1/Systems/ecefa8ee-fbc5-4728-9abc-ab10503e3bbf"
         bmcCredentialsName:
           name: "bmh1-secret"
