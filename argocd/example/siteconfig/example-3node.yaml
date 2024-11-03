@@ -62,18 +62,18 @@ spec:
         nodeLabels:
           node-role.kubernetes.io/master-du:
           custom-label/parameter1: true
-        bmcAddress: "redfish-virtualmedia+http://192.168.62.250:8000/redfish/v1/Systems/43914e5c-0c14-40be-918e-5c53e650a031"
+        bmcAddress: "redfish-virtualmedia+http://192.168.62.250:8000/redfish/v1/Systems/ecefa8ee-fbc5-4728-9abc-ab10503e3bbf"
         bmcCredentialsName:
           name: "bmh1-secret"
-        bootMACAddress: "52:54:00:17:29:ff"
+        bootMACAddress: "52:54:00:a4:db:55"
         # Use UEFISecureBoot to enable secure boot for this node
         bootMode: "UEFI"
         rootDeviceHints:
-          deviceName: "/dev/sda"
+          deviceName: "/dev/vda"
         nodeNetwork:
           interfaces:
             - name: enp1s0
-              macAddress: "52:54:00:17:29:ff"
+              macAddress: "52:54:00:a4:db:55"
           config:
             interfaces:
               - name: enp1s0
@@ -100,17 +100,17 @@ spec:
                 table-id: 254
       - hostName: "node2.3node.example.com"
         role: "master"
-        bmcAddress: "redfish-virtualmedia+http://192.168.62.250:8000/redfish/v1/Systems/01de554b-42fb-4379-8dc1-2cfdec31c191"
+        bmcAddress: "redfish-virtualmedia+http://192.168.62.250:8000/redfish/v1/Systems/95c8eb0d-7a05-4cbe-ac29-1d3bb466f728"
         bmcCredentialsName:
           name: "bmh2-secret"
-        bootMACAddress: "52:54:00:ae:92:7d"
+        bootMACAddress: "52:54:00:a4:db:65"
         bootMode: "UEFI"
         rootDeviceHints:
-          deviceName: "/dev/sda"
+          deviceName: "/dev/vda"
         nodeNetwork:
           interfaces:
             - name: enp1s0
-              macAddress: "52:54:00:ae:92:7d"
+              macAddress: "52:54:00:a4:db:65"
           config:
             interfaces:
               - name: enp1s0
@@ -137,17 +137,17 @@ spec:
                 table-id: 254
       - hostName: "node3.3node.example.com"
         role: "master"
-        bmcAddress: "redfish-virtualmedia+http://192.168.62.250:8000/redfish/v1/Systems/bb3b9410-157b-4af1-9c31-4f4dd7edd0e2"
+        bmcAddress: "redfish-virtualmedia+http://192.168.62.250:8000/redfish/v1/Systems/1b19d193-1cf2-4025-aaec-33fcaa8bfe6b"
         bmcCredentialsName:
           name: "bmh3-secret"
-        bootMACAddress: "52:54:00:be:32:eb"
+        bootMACAddress: "52:54:00:a4:db:75"
         bootMode: "UEFI"
         rootDeviceHints:
-          deviceName: "/dev/disk/by-path/pci-0000:01:00.0-scsi-0:2:0:0"
+          deviceName:  "/dev/vda"
         nodeNetwork:
           interfaces:
             - name: enp1s0
-              macAddress: "52:54:00:be:32:eb"
+              macAddress: "52:54:00:a4:db:75"
           config:
             interfaces:
               - name: enp1s0
