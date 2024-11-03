@@ -57,14 +57,14 @@ spec:
     #biosConfigRef:
     #  filePath: "example-hw.profile"
     nodes:
-      - hostName: "example-node1.example.com"
+      - hostName: "node1.3node.example.com"
         role: "master"
         nodeLabels:
           node-role.kubernetes.io/master-du:
           custom-label/parameter1: true
         bmcAddress: "redfish-virtualmedia+http://192.168.62.250:8000/redfish/v1/Systems/43914e5c-0c14-40be-918e-5c53e650a031"
         bmcCredentialsName:
-          name: "bmh-secret"
+          name: "bmh1-secret"
         bootMACAddress: "52:54:00:17:29:ff"
         # Use UEFISecureBoot to enable secure boot for this node
         bootMode: "UEFI"
@@ -79,9 +79,9 @@ spec:
               - name: enp1s0
                 type: ethernet
                 state: up
-                ipv4:
-                  enabled: false
                 ipv6:
+                  enabled: false
+                ipv4:
                   enabled: true
                   address:
                   - ip: 192.168.63.77
@@ -98,42 +98,42 @@ spec:
                 next-hop-interface: enp1s0
                 next-hop-address: 192.168.63.1
                 table-id: 254
-      - hostName: "example-node2.example.com"
+      - hostName: "node2.3node.example.com""
         role: "master"
-        bmcAddress: "idrac-virtualmedia+https://[1111:2222:3333:4444::bbbb:2]/redfish/v1/Systems/System.Embedded.1"
+        bmcAddress: "redfish-virtualmedia+http://192.168.62.250:8000/redfish/v1/Systems/01de554b-42fb-4379-8dc1-2cfdec31c191"
         bmcCredentialsName:
-          name: "example-node2-bmh-secret"
-        bootMACAddress: "AA:BB:CC:DD:EE:22"
+          name: "bmh2-secret"
+        bootMACAddress: "52:54:00:ae:92:7d"
         bootMode: "UEFI"
         rootDeviceHints:
-          deviceName: "/dev/disk/by-path/pci-0000:01:00.0-scsi-0:2:0:0"
+          deviceName: "/dev/sda"
         nodeNetwork:
           interfaces:
-            - name: eno1
-              macAddress: "AA:BB:CC:DD:EE:22"
+            - name: enp1s0
+              macAddress: "52:54:00:ae:92:7d"
           config:
             interfaces:
-              - name: eno1
+              - name: enp1s0
                 type: ethernet
                 state: up
-                ipv4:
-                  enabled: false
                 ipv6:
+                  enabled: false
+                ipv4:
                   enabled: true
                   address:
-                  - ip: 1111:2222:3333:4444::aaaa:2
-                    prefix-length: 64
+                  - ip: 192.168.63.78
+                    prefix-length: 24
             dns-resolver:
               config:
                 search:
                 - example.com
                 server:
-                - 1111:2222:3333:4444::2
+                - 192.168.63.20
             routes:
               config:
-              - destination: ::/0
-                next-hop-interface: eno1
-                next-hop-address: 1111:2222:3333:4444::1
+              - destination: 0.0.0.0/0
+                next-hop-interface: enp1s0
+                next-hop-address: 192.168.63.1
                 table-id: 254
       - hostName: "example-node3.example.com"
         role: "master"
