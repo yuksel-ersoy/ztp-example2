@@ -32,7 +32,7 @@ spec:
       - cidr: 10.128.0.0/14
         hostPrefix: 23
     machineNetwork:
-      - cidr: 192.168.63.0/24
+      - cidr: 192.168.62.0/24
     serviceNetwork:
       - 172.30.0.0/16
     #additionalNTPSources:
@@ -44,8 +44,8 @@ spec:
      # - cidr: 1001:1::/48
       #  hostPrefix: 64
     # For 3-node and standard clusters with static IPs, the API and Ingress IPs must be configured here
-    apiVIP: 192.168.63.80
-    ingressVIP: 192.168.63.81
+    apiVIP: 192.168.62.80
+    ingressVIP: 192.168.62.81
     #serviceNetwork:
      # - 1001:2::/112
     #additionalNTPSources:
@@ -81,7 +81,7 @@ spec:
                 ipv4:
                   enabled: true
                   address:
-                  - ip: 192.168.63.77
+                  - ip: 192.168.62.77
                     prefix-length: 24
             dns-resolver:
               config:
@@ -93,7 +93,7 @@ spec:
               config:
               - destination: 0.0.0.0/0
                 next-hop-interface: enp1s0
-                next-hop-address: 192.168.63.1
+                next-hop-address: 192.168.62.1
                 table-id: 254
       - hostName: "node2.3node.example.com"
         role: "master"
@@ -118,7 +118,7 @@ spec:
                 ipv4:
                   enabled: true
                   address:
-                  - ip: 192.168.63.78
+                  - ip: 192.168.62.78
                     prefix-length: 24
             dns-resolver:
               config:
@@ -130,7 +130,7 @@ spec:
               config:
               - destination: 0.0.0.0/0
                 next-hop-interface: enp1s0
-                next-hop-address: 192.168.63.1
+                next-hop-address: 192.168.62.1
                 table-id: 254
       - hostName: "node3.3node.example.com"
         role: "master"
@@ -155,7 +155,7 @@ spec:
                 ipv4:
                   enabled: true
                   address:
-                  - ip: 192.168.63.79
+                  - ip: 192.168.62.79
                     prefix-length: 24
             dns-resolver:
               config:
@@ -167,5 +167,5 @@ spec:
               config:
               - destination: 0.0.0.0/0
                 next-hop-interface: enp1s0
-                next-hop-address: 192.168.63.1
+                next-hop-address: 192.168.62.1
                 table-id: 254
